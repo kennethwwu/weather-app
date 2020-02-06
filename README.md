@@ -20,9 +20,9 @@ Launches the test runner in the interactive watch mode.<br />
 
 Builds the app for production to the `build` folder.<br />
 
-Run in the container:
+### Run in the container:
 
-### `
-docker build -t weather-app .
-docker run -d -p3000:3000 weather-app
-`
+```bash
+    docker build -t weather-app .
+    docker run -d -p3000:3000 weather-app
+```
