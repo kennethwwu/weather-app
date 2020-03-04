@@ -37,7 +37,7 @@ export default function CurrentWeather() {
                 <div className="col-6">
                     <div><span>Humidity:</span> {humidity}%</div>
                     <div><span>Visibility:</span> {visibility.toFixed(0)}</div>
-                    <div><span>Wind:</span> {wind_speed.toFixed(0)} kph {wind_direction_compass}</div>
+                    <div><span>Wind:</span> {wind_speed.toFixed(0)} kph {wind_direction_compass.toLower}</div>
                 </div>
           </div>
         </div>

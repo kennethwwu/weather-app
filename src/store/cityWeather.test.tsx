@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, cleanup, act, waitForElement } from '@testing-library/react'
 import axios from 'axios'
-import { initialState, useAppState} from './cityWeather'
-import { Units } from '../types/units'
+import { initialState, useAppState} from '../hooks/useAppState'
 import { Weather } from '../types/weatherType'
 
 const mockData:Weather = {

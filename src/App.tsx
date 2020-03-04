@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import './App.css';
 import SearchBar from './components/searchBar';
 import WeatherSection from './components/weatherSection';
-import stateContext, { useAppState, initialState } from './store/cityWeather';
-import { Units } from './types/units'
+import stateContext from './store/cityWeather';
+import { useAppState, initialState } from './hooks/useAppState'
 
 const App = () => {
 

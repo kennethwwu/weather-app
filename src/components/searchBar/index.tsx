@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { searchLocation, searchLocationByGeo } from '../../helpers/httpClient';
-import { getGeolocation } from '../../helpers/geolocation';
+import { searchLocation } from '../../helpers/httpClient';
 import stateContext from '../../store/cityWeather'
 
 export default function SearchBar() {
@@ -9,18 +8,8 @@ export default function SearchBar() {
     const [showLocs, setShowLocs] = useState(false);
     const { setCity } = useContext(stateContext);
 
-    async function getCitybyGeo(){
-        try{
-            const { coords } = await getGeolocation();
-            const [{woeid}] = await searchLocationByGeo(coords);
-            setCity(woeid)
-        }catch(e){
-            console.log(e);
-        }
-    }
-
     React.useEffect(() => {
-        (async () => {
+        const getLoactions = async () => {
             try{
                 const locations = await searchLocation(query);
                 setLocations(locations);
@@ -29,13 +18,15 @@ export default function SearchBar() {
                 setLocations([]);
             }
      
-        })()
+        }
+
+        if(query){
+            getLoactions();
+        }else{
+            setLocations([]);
+        }
 
     }, [query])
-
-    React.useEffect(() => {
-        getCitybyGeo();
-    }, [])
 
     const selectCity = location => {
         setQuery(location.title);
@@ -49,7 +40,7 @@ export default function SearchBar() {
                 <li 
                     key={loc.woeid+''} 
                     onClick={() => {selectCity(loc)}}>
-                    <a href="#" aria-label={loc.title}>{loc.title}</a>
+                    <span aria-label={loc.title}>{loc.title}</span>
                 </li>
             )
         })
@@ -59,7 +50,7 @@ export default function SearchBar() {
         <>
             <div className="input-group mb-3">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">🔎</span>
+                    <span className="input-group-text" id="basic-addon1" role="img" aria-label="search bar">🔎</span>
                 </div>
                 <input 
                     type="text" 
