@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import SearchBar from './components/searchBar';
 import WeatherSection from './components/weatherSection';
-import stateContext from './store/cityWeather';
+import stateContext from './store/appStateStore';
 import { useAppState, initialState } from './hooks/useAppState'
 
 const App = () => {

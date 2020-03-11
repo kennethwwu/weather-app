@@ -30,7 +30,7 @@ async function searchLocationByGeo({latitude, longitude}){
     return res.status === 200?res.data:[];
 }
 
-async function getLocationWeater(woeid:number){
+async function getLocationWeather(woeid:number){
     const res = await instance.request({
         url:`/api/location/${woeid}/`,
         method: 'get',
@@ -40,4 +40,4 @@ async function getLocationWeater(woeid:number){
     return res.status === 200?res.data:null;
 }
 
-export { searchLocation, searchLocationByGeo, getLocationWeater };
+export { searchLocation, searchLocationByGeo, getLocationWeather };

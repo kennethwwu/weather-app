@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import stateContext from '../../store/cityWeather'
+import React from 'react'
+import { useMyState } from '../../store/appStateStore'
 import moment from 'moment-timezone'
 import { calcTempByUnit } from '../../helpers/unitConventor'
 
 export default function DayWeather({weather, isToday}) {
-    const { unit } = useContext(stateContext);
+    const { unit } = useMyState();
     const { applicable_date, weather_state_abbr, min_temp, max_temp, weather_state_name } = weather;
     return (
         <div className={"day-col col-sm-6 col-md-2"}>

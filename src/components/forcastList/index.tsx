@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import stateContext from '../../store/cityWeather'
+import React from 'react'
+import { useMyState } from '../../store/appStateStore'
 import DayWeather from '../dayWeather'
 
 
 export default function ForcastList() {
-    const { weather } = useContext(stateContext);
+    const { weather } = useMyState();
     const { consolidated_weather } = weather;
     function loadDayList(){
         return consolidated_weather.map( (weather, index) => {

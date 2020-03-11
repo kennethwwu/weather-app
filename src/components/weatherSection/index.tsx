@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
-import stateContext from '../../store/cityWeather'
+import React from 'react'
+import { useMyState } from '../../store/appStateStore'
 import CurrentWeather from '../currentWeather'
 import ForcastList from '../forcastList'
 import Loading from '../loading'
 
 export default function WeatherSection() {
-    const { weather, isLoading } = useContext(stateContext);
+    const { weather, isLoading } = useMyState();
     return (
         
         isLoading?<Loading />:(

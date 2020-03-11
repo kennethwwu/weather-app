@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { searchLocationByGeo } from '../helpers/httpClient';
 import { getGeolocation } from '../helpers/geolocation';
-import { getLocationWeater } from '../helpers/httpClient';
+import { getLocationWeather } from '../helpers/httpClient';
 import { Weather } from '../types/weatherType'
 import { Units } from '../types/units'
 
@@ -27,12 +27,12 @@ export function useAppState({woeid, defaultUnit, loadingState}):AppStateType {
     const [weather, setWeather] = useState<Weather|null>(null);
     const [unit, setUnit] = useState(defaultUnit);
     const [isLoading, setLoading] = useState(loadingState);
-    console.log('useAppState updated')
+
     useEffect( () => {
         (async () => {
             setLoading(true)
             try{
-                const weather = await getLocationWeater(city);
+                const weather = await getLocationWeather(city);
                 setWeather(weather);
             }catch(e){
                 console.log(e)

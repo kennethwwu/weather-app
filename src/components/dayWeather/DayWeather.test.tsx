@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import DayWeather from './index';
-import stateContext, { useAppState, initialState } from '../../store/cityWeather'
+import stateContext from '../../store/appStateStore'
+import { useAppState, initialState } from '../../hooks/useAppState'
 
 const makeWrapper = (hook: any, initialState:any) => ({ children }) => (
     <stateContext.Provider value={hook.call(null, initialState)}>

@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
-import stateContext from '../../store/cityWeather'
+import React from 'react'
+import { useMyState } from '../../store/appStateStore'
 import moment from 'moment-timezone'
 import { Units } from '../../types/units'
 import { calcTempByUnit } from '../../helpers/unitConventor'
 
 export default function CurrentWeather() {
-    const { weather, unit, switchUnit } = useContext(stateContext);
+    const { weather, unit, switchUnit } = useMyState();
     const { title, parent, consolidated_weather, time, timezone } = weather;
     const { the_temp, weather_state_name, weather_state_abbr, humidity, visibility, wind_speed, wind_direction_compass} = consolidated_weather[0]
     return (

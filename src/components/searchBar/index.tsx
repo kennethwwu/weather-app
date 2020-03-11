@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { searchLocation } from '../../helpers/httpClient';
-import stateContext from '../../store/cityWeather'
+import { useMyState } from '../../store/appStateStore'
 
 export default function SearchBar() {
     const [query, setQuery] = useState('');
     const [locations, setLocations] = useState([]);
     const [showLocs, setShowLocs] = useState(false);
-    const { setCity } = useContext(stateContext);
+    const { setCity } = useMyState();
 
     React.useEffect(() => {
         const getLoactions = async () => {
@@ -21,9 +21,15 @@ export default function SearchBar() {
         }
 
         if(query){
-            getLoactions();
+            window['searchDebounce'] = setTimeout(() => {
+                getLoactions();
+            }, 500)
         }else{
             setLocations([]);
+        }
+
+        return () => {
+            clearTimeout(window['searchDebounce'])
         }
 
     }, [query])
