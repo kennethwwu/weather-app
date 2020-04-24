@@ -56,9 +56,9 @@ export function useAppState({woeid, defaultUnit, loadingState}):AppStateType {
         getCitybyGeo();
     }, [])
 
-    function switchUnit(newUnit:Units){
+    const switchUnit = useCallback((newUnit:Units) => {
         setUnit(newUnit)
-    }
+    }, [setUnit])
 
     const setCity = useCallback((woeid:number) => {
         setCityId(woeid)

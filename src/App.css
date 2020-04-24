@@ -11,3 +11,16 @@
 .day-col{
   text-align: center;
 }
+
+.city-list{
+  position: absolute;
+  top: 39px;
+  width: 100%;
+  background: white;
+  z-index: 99;
+}
+
+.city-list li{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

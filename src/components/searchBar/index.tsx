@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { searchLocation } from '../../helpers/httpClient';
 import { useMyState } from '../../store/appStateStore'
 
@@ -7,6 +7,19 @@ export default function SearchBar() {
     const [locations, setLocations] = useState([]);
     const [showLocs, setShowLocs] = useState(false);
     const { setCity } = useMyState();
+
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        console.log((inputRef as any).current.children[0]);
+        (inputRef as any).current.children[0].children[1].focus();
+        (inputRef as any).current.addEventListener('mouseout', () => {
+            setShowLocs(false);
+        });
+        (inputRef as any).current.addEventListener('mousemove', () => {
+            setShowLocs(true);
+        });
+    }, [])
 
     React.useEffect(() => {
         const getLoactions = async () => {
@@ -23,7 +36,7 @@ export default function SearchBar() {
         if(query){
             window['searchDebounce'] = setTimeout(() => {
                 getLoactions();
-            }, 500)
+            }, 200)
         }else{
             setLocations([]);
         }
@@ -40,8 +53,8 @@ export default function SearchBar() {
         setShowLocs(false)
     }
 
-    function loadLocations(locations){
-        return locations.map( loc => {
+    const LocationArray = useMemo(function showLocations(){
+        return locations.map( (loc:any) => {
             return (
                 <li 
                     key={loc.woeid+''} 
@@ -50,10 +63,10 @@ export default function SearchBar() {
                 </li>
             )
         })
-    }
+    }, [locations])
 
     return (
-        <>
+        <div ref={inputRef} style={{position: 'relative'}}>
             <div className="input-group mb-3">
                 <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1" role="img" aria-label="search bar">🔎</span>
@@ -63,12 +76,12 @@ export default function SearchBar() {
                     className={"form-control"}
                     placeholder="search a location's weather"
                     value={query}
-                    onFocus={ () => setShowLocs(true) } 
+                    // onFocus={ () => setShowLocs(true) } 
                     // onBlur={ () => setShowLocs(false) }  
                     onChange={(e) => setQuery(e.target.value)} />
             </div>
 
-            { showLocs && (<ul>{loadLocations(locations)}</ul>)}
-        </>
+            <ul className={`${showLocs?'':'invisible'} city-list`}>{LocationArray}</ul>
+        </div>
     )
 }
